@@ -1,0 +1,16 @@
+services:
+
+  prosody:
+    image: prosody/prosody
+    container_name: prosody
+    ports:
+      - "5222:5222"
+    environment:
+      - LOCAL=admin
+      - DOMAIN=localhost
+      - PASSWORD=12213443
+    volumes:
+      - ./prosody/configuration:/etc/prosody
+      - ./prosody:/var/log/prosody
+      - ./prosody/modules:/usr/lib/prosody-modules
+      - ./prosody/data:/var/lib/prosody
