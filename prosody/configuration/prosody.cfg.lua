@@ -248,3 +248,6 @@ modules_enabled = { "muc_mam" }
 -- should go under the corresponding VirtualHost or Component line.
 --
 -- For more information see https://prosody.im/doc/configure
+
+
+--- threefold@localhost nurture@localhost kinship@localhost
