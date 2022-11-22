@@ -14,16 +14,26 @@ services:
       - ./prosody:/var/log/prosody
       - ./prosody/modules:/usr/lib/prosody-modules
       - ./prosody/data:/var/lib/prosody
+    extra_hosts:
+      conference.other-prosody: 172.18.0.11
+    networks:
+      thisnet:
+        ipv4_address: 172.18.0.10
 
   other-prosody:
     image: prosody/prosody
     container_name: other-prosody
     environment:
-      - LOCAL=fulano
+      - LOCAL=other
       - DOMAIN=other-prosody
       - PASSWORD=12213443
     volumes:
       - ./prosody/configuration/other-prosody.cfg.lua:/etc/prosody/prosody.cfg.lua
+    extra_hosts:
+      conference.prosody: 172.18.0.10
+    networks:
+      thisnet:
+        ipv4_address: 172.18.0.11
 
   admin:
     build: .
@@ -31,31 +41,60 @@ services:
     tty: true
     stdin_open: true
     command: /usr/bin/profanity
+    networks:
+      - thisnet
+    extra_hosts:
+      conference.other-prosody: 172.18.0.11
 
   nurture:
     build: .
-    container_name: admin 
+    container_name: nurture
     tty: true
     stdin_open: true
     command: /usr/bin/profanity
+    networks:
+      - thisnet
+    extra_hosts:
+      conference.other-prosody: 172.18.0.11
 
   threefold:
     build: .
-    container_name: admin 
+    container_name: threefold
     tty: true
     stdin_open: true
     command: /usr/bin/profanity
+    networks:
+      - thisnet
+    extra_hosts:
+      conference.other-prosody: 172.18.0.11
 
   kinship:
     build: .
-    container_name: admin 
+    container_name: kinship
     tty: true
     stdin_open: true
     command: /usr/bin/profanity
+    networks:
+      - thisnet
+    extra_hosts:
+      conference.other-prosody: 172.18.0.11
 
-  fulano:
+  other-user:
     build: .
-    container_name: admin 
+    container_name: other-user
     tty: true
     stdin_open: true
     command: /usr/bin/profanity
+    networks:
+      - thisnet
+    extra_hosts:
+      conference.prosody: 172.18.0.10
+
+
+
+networks:
+  thisnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.0.0/24"

@@ -1,4 +1,7 @@
 # XMPP Test
+> Guilherme Egle
+> Prosody: https://prosody.im/
+> Profanity: https://github.com/profanity-im/profanity
 
 
 # Setup
