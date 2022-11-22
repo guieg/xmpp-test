@@ -7,10 +7,38 @@ services:
       - "5222:5222"
     environment:
       - LOCAL=admin
-      - DOMAIN=localhost
+      - DOMAIN=prosody
       - PASSWORD=12213443
     volumes:
       - ./prosody/configuration:/etc/prosody
       - ./prosody:/var/log/prosody
       - ./prosody/modules:/usr/lib/prosody-modules
       - ./prosody/data:/var/lib/prosody
+
+  admin:
+    build: .
+    container_name: admin 
+    tty: true
+    stdin_open: true
+    command: /usr/bin/profanity
+
+  nurture:
+    build: .
+    container_name: admin 
+    tty: true
+    stdin_open: true
+    command: /usr/bin/profanity
+
+  threefold:
+    build: .
+    container_name: admin 
+    tty: true
+    stdin_open: true
+    command: /usr/bin/profanity
+
+  kinship:
+    build: .
+    container_name: admin 
+    tty: true
+    stdin_open: true
+    command: /usr/bin/profanity
