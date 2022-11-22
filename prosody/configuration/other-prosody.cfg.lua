@@ -21,7 +21,7 @@
 -- for the server. Note that you must create the accounts separately
 -- (see :qhttps://prosody.im/doc/creating_accounts for info)
 -- Example: admins = { "user1@example.com", "user2@example.net" }
-admins = { "admin@prosody" }
+admins = { "fulano@other-prosody" }
 
 -- This option allows you to specify additional locations where Prosody
 -- will search first for modules. For additional modules you can install, see
@@ -209,7 +209,7 @@ certificates = "certs"
 -- You need to add a VirtualHost entry for each domain you wish Prosody to serve.
 -- Settings under each VirtualHost entry apply *only* to that host.
 
-VirtualHost "prosody"
+VirtualHost "other-prosody"
 -- Prosody requires at least one enabled VirtualHost to function. You can
 -- safely remove or disable 'localhost' once you have added another.
 
@@ -222,7 +222,7 @@ VirtualHost "prosody"
 -- For more information on components, see https://prosody.im/doc/components
 
 ---Set up a MUC (multi-user chat) room server on conference.example.com:
-Component "conference.prosody" "muc"
+Component "conference.other-prosody" "muc"
 --- Store MUC messages in an archive and allow users to access it
 modules_enabled = { "muc_mam" }
 

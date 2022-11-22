@@ -15,6 +15,16 @@ services:
       - ./prosody/modules:/usr/lib/prosody-modules
       - ./prosody/data:/var/lib/prosody
 
+  other-prosody:
+    image: prosody/prosody
+    container_name: other-prosody
+    environment:
+      - LOCAL=fulano
+      - DOMAIN=other-prosody
+      - PASSWORD=12213443
+    volumes:
+      - ./prosody/configuration/other-prosody.cfg.lua:/etc/prosody/prosody.cfg.lua
+
   admin:
     build: .
     container_name: admin 
@@ -37,6 +47,13 @@ services:
     command: /usr/bin/profanity
 
   kinship:
+    build: .
+    container_name: admin 
+    tty: true
+    stdin_open: true
+    command: /usr/bin/profanity
+
+  fulano:
     build: .
     container_name: admin 
     tty: true
